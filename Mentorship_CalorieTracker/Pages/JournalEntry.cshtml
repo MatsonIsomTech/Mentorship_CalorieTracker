@@ -3,17 +3,43 @@
 @{
     ViewData["Title"] = "Journal Entry";
 }
-
 <div class="text-center">
-    <h1>Journal Entry</h1>
-    <p>This page should have a form to add/edit a journal entry. Basically the following inputs.</p>
-    <ul>
-        <li>DateTime</li>
-        <li>Food name</li>
-        <li>Number of servings eaten</li>
-        <li>Grams of protein per serving</li>
-        <li>Grams of fat per serving</li>
-        <li>Grams of carbohydrates per serving</li>
-    </ul>
-    <p>It might be nice to provide a typeahead here for the "Food name". Then with some magic we could pull in previous entries for the food item. Sorta like build your own food look up library.</p>
+    <form method="post" class="p-4">
+        <h2 class="mb-3">
+            @if(Model.Entry.Id == 0)
+            {
+                <span>Add New Entry</span>
+            }
+            else
+            {
+                <span>Edit Entry</span>
+            }
+            </h2>
+        <input type="hidden" asp-for="Entry.Id" />
+        <div class="mb-3">
+            <label asp-for="Entry.EntryDate" class="form-label">Entry Date</label>
+            <input asp-for="Entry.EntryDate" class="form-control" type="datetime-local" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Entry.Food" class="form-label">Food</label>
+            <input asp-for="Entry.Food" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Entry.Servings" class="form-label">Servings</label>
+            <input asp-for="Entry.Servings" class="form-control" type="number" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Entry.ProteinGrams" class="form-label">Protein (g)</label>
+            <input asp-for="Entry.ProteinGrams" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Entry.FatGrams" class="form-label">Fat (g)</label>
+            <input asp-for="Entry.FatGrams" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Entry.CarbohydratesGrams" class="form-label">Carbohydrates (g)</label>
+            <input asp-for="Entry.CarbohydratesGrams" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
 </div>
