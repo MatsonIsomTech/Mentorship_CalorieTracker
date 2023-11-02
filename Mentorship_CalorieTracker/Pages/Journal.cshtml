@@ -1,10 +1,46 @@
 ﻿@page
 @model Mentorship_CalorieTracker.Pages.JournalModel
 @{
-    ViewData["Title"] = "Journal";
+    ViewData["Title"] = "Journal Entries" ;
 }
 
 <div class="text-center">
     <h1>Food Journal</h1>
-    <p>This page should list the user's food journal entries. Plus it should link to an add/edit journal entry page for each listing, plus for a new listing.</p>
+    @if (Model.Entries.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Food</th>
+                    <th>Servings</th>
+                    <th>Protein (g)</th>
+                    <th>Fat (g)</th>
+                    <th>Carbs (g)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var entry in Model.Entries)
+                {
+                    <tr>
+                        <td>@entry.EntryDate.ToString("g")</td>
+                        <td>@entry.Food</td>
+                        <td>@entry.Servings</td>
+                        <td>@entry.ProteinGrams</td>
+                        <td>@entry.FatGrams</td>
+                        <td>@entry.CarbohydratesGrams</td>
+                        <td>
+                            <a asp-page="/EntryCreateOrUpdate" asp-route-id="@entry.Id">Edit</a> |
+                            <a asp-page="/EntryDelete" asp-route-id="@entry.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No entries found.</p>
+    }
 </div>
