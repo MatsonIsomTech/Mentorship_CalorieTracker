@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Mentorship_CalorieTracker.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mentorship_CalorieTracker.Data
@@ -9,5 +10,8 @@ namespace Mentorship_CalorieTracker.Data
             : base(options)
         {
         }
+
+        public DbSet<Entry> Entries { get; set; }
+
     }
 }
