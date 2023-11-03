@@ -14,6 +14,7 @@ namespace Mentorship_CalorieTracker.Models
         public double ProteinGrams { get; set; }
         public double FatGrams { get; set; }
         public double CarbohydratesGrams { get; set; }
+        public double Calories { get; set; }
 
         public Entry()
         {

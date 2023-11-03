@@ -56,6 +56,7 @@ namespace Mentorship_CalorieTracker.Pages
                 entryInDb.ProteinGrams = Entry.ProteinGrams;
                 entryInDb.FatGrams = Entry.FatGrams;
                 entryInDb.CarbohydratesGrams = Entry.CarbohydratesGrams;
+                entryInDb.Calories = Entry.Calories;
 
                 // The context automatically marks the entity as modified when you change any of its values.
                 // _context.Update(entryInDb); // This is redundant if you're modifying the properties as above.
@@ -63,7 +64,7 @@ namespace Mentorship_CalorieTracker.Pages
 
 
             await _context.SaveChangesAsync();
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Journal");
         }
     }
 }
