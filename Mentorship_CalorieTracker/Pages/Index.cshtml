@@ -1,12 +1,66 @@
-﻿@page
-@model IndexModel
+﻿@page 
+@model Mentorship_CalorieTracker.Pages.IndexModel
 @{
     ViewData["Title"] = "Dashboard";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>This page should show the user their daily progess compared to the goals they set.</p>
-    <p>They should be able to select different days on this page to view as well.</p>
-    <p>Should show tally of macros for the day too.</p>
+    <h1 class="display-4">Welcome to Caloriez</h1>
+    <div class="row">
+        <div class="col-4">
+        </div>
+        <div class="col-4">
+            <form method="POST" id="dateForm">
+                <label asp-for="DayDate" class="form-label">Tally Date</label>
+                <input asp-for="DayDate" id="dateDate" class="form-control" type="date" />
+            </form>
+        </div>
+        <div class="col-4">
+        </div>
+    </div>
+    <h2>Calories: @Model.DayTally.Calories</h2>
+    <div class="row">
+        <div class="col-4">
+        </div>
+        <div class="col-4">
+            <h2>Macros</h2>
+            <canvas id="myChart"></canvas>
+        </div>
+        <div class="col-4"></div>
+    </div>
+    <div>
+        
+        <p></p>
+    </div>
 </div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Protien (g): @(Model.DayTally.ProteinGrams)', 'Fat (g): @(Model.DayTally.FatGrams)', 'Carb (g): @(Model.DayTally.CarbohydratesGrams)'],
+                datasets: [{
+                    label: 'Macros for Day',
+                    data: [@(Model.DayTally.ProteinGrams), @(Model.DayTally.FatGrams), @(Model.DayTally.CarbohydratesGrams)],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        document.getElementById("dateDate").addEventListener("change", function () {
+            document.getElementById("dateForm").submit();
+        });
+    </script>
+
+}
