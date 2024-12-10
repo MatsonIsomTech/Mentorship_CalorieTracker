@@ -22,7 +22,7 @@
         </div>
         <div class="mb-3">
             <label asp-for="Entry.Food" class="form-label">Food</label>
-            <input asp-for="Entry.Food" class="form-control" />
+            <input asp-for="Entry.Food" class="form-control" id="food" onchange="foodlookup()"  />
         </div>
         <div class="mb-3">
             <label asp-for="Entry.Servings" class="form-label">Servings</label>
@@ -47,3 +47,25 @@
         <button type="submit" class="btn btn-primary">Save</button>
     </form>
 </div>
+
+@section Scripts {
+
+    <script>
+
+        function foodlookup()
+        {
+            document.getElementById("food");
+
+            xhttp.onload = function () {
+                document.getElementById("demo").innerHTML = this.responseText;
+            }
+            xhttp.open("GET", "ajax_info.txt", true);
+            xhttp.send();
+        }
+
+
+
+
+    </script>
+
+}
